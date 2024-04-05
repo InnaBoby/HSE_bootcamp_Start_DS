@@ -5,4 +5,4 @@
 В файле finalproject.py  описаны функции для формирования датафрэймов и отрисовки графиков
 В файле app.py прописана логика MVP
 
-MVP разработано с имспользованием фреймворка Streamlit 
+MVP разработано с имспользованием фреймворка Streamlit https://hsebootcampstartdsgit-dgmwe8yma6ajlep6l64enr.streamlit.app/
