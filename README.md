@@ -4,11 +4,17 @@
 
 **Files:**
 
-*Requirements.txt необходимые зависимости 
+- requirements.txt необходимые зависимости 
 
-*finalproject.py  описаны функции для формирования датафрэймов и отрисовки графиков 
+- finalproject.py  описаны функции для формирования датафрэймов и отрисовки графиков 
 
-*app.py прописана логика MVP 
+- app.py прописана логика MVP 
 
+**Входные данные:**
+- data.csv данные по ифляции в процентах, источник: https://уровень-инфляции.рф/таблицы-инфляции
+- tab3-zpl_2000-2016.xlsx и tab3-zpl_2023.xlsx данные по средним номинальным зарплатам по отраслям экономики за 2000-2016 год и 2017-2023гг соответственно, источник: https://rosstat.gov.ru/labor_market_employment_salaries
 
-MVP разработано с имспользованием фреймворка Streamlit и размещено на https://hsebootcampstartdsgit-dgmwe8yma6ajlep6l64enr.streamlit.app/
+  
+
+**MVP**
+разработано с имспользованием фреймворка Streamlit и размещено на https://hsebootcampstartdsgit-dgmwe8yma6ajlep6l64enr.streamlit.app/
