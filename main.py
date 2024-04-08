@@ -1,5 +1,6 @@
 # This is a sample Python script.
 import streamlit as st
+from PIL import Image
 import time
 import pandas as pd
 from finalproject import *
@@ -9,11 +10,13 @@ import requests
 
 st.subheader ('Итоговый проект буткэмпа ВШЭ "Старт в DataScience"')
 st.title('Анализ средних зарплат по отраслям')
+img = Image.open('dinamika_zarplati.jpg')
+st.image(img)
 
 
 #подгружаем данные по средним номинальным зарплатам
-salary_1 = pd.read_excel('tab3-zpl_2000-2016.xlsx')
-salary_2 = pd.read_excel('tab3-zpl_2023.xlsx')
+salary_1 = pd.read_excel('data/tab3-zpl_2000-2016.xlsx')
+salary_2 = pd.read_excel('data/tab3-zpl_2023.xlsx')
 salary = prepare_salary_data(salary_1, salary_2)
 
 
