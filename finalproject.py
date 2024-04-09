@@ -18,14 +18,12 @@ import requests
 
 
 
-def get_table(url):
+def get_table(url, indx):
 
   ''' Функция для загрузки данных по инфляции с сайта и сохранении в файл data.csv'''
 
   r=requests.get(url)
-  df=pd.read_html(r.content)[0]
-  print(df)
-  df.to_csv('data.csv', index=True)
+  df=pd.read_html(r.content)[indx]
   return df
 
 
@@ -53,24 +51,34 @@ def prepare_salary_data (df_1, df_2):
 
 
 
-def salary_dinamic_graph (df):
+def salary_dinamic_graph (df, df2=False):
 
   ''' Функция для отрисовки графиков динамики средних зарплат по отраслям по годам'''
 
   avarage_salary = df.describe().iloc[1]
   years = df.columns.to_list()[1:]
-  fig, ax = plt.subplots(figsize=(10, 5), layout='constrained')
+  fig, ax1 = plt.subplots(figsize=(10, 5), layout='constrained')
+  color = 'tab:blue'
   for indx in range(len(df)):
     x_data = df.iloc[indx].to_list()[1:]
     legend_data = df.iloc[indx].to_list()[0]
-    ax.plot(years, x_data, label=legend_data)
-    #добавим график среднего уровня зарплат по 4-ем отраслям
-    ax.plot(years, avarage_salary, label='avarage_salary', linestyle='--')
+    ax1.plot(years, x_data, label=legend_data)
 
-  ax.set_xlabel('years')
-  ax.set_ylabel('salary')
-  ax.set_title("Изменение зарплаты по годам")
-  ax.legend()
+  # добавим график среднего уровня зарплат по 4-ем отраслям
+  ax1.plot(years, avarage_salary, label='avarage_salary', linestyle='--')
+  ax1.set_xlabel('years')
+  ax1.set_ylabel('salary')
+  ax1.set_title("Изменение зарплаты по годам")
+  ax1.legend()
+
+  if df2:
+    ax2 = ax1.twinx()
+    color = 'tab:red'
+    ax2.set_ylabel('Дополнительные данные', color=color)
+    ax2.tick_params(axis='y', labelcolor=color)
+    ax2.plot(df2, label='Дополнительные данные', linestyle='-.', color=color)
+    ax2.legend(loc='upper right')
+
   return fig
 
 
