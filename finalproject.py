@@ -113,3 +113,44 @@ def real_salary_graph(year, inflation, salary):
   ax.legend()
 
   return fig
+
+
+
+def add_prirost(salary):
+  salary2 = salary.T
+  salary2.columns = salary2.iloc[0]
+  salary2 = salary2[1:]
+  salary2['Avarage'] = (salary2['добыча полезных ископаемых'] +
+                        salary2['обрабатывающие производства'] +
+                        salary2['образование'] +
+                        salary2['строительство']) / 4
+  for col in salary2.columns.to_list():
+    salary2[f'Прирост ' + col] = 0
+    for indx in range(1, len(salary2)):
+      salary2[f'Прирост ' + col][indx] = (salary2[col][indx] * 100 / salary2[col][indx - 1]) - 100
+
+  salary2 = salary2.T
+
+  years = salary2.columns.to_list()
+  fig, ax1 = plt.subplots()
+  color = 'tab:blue'
+  for indx in range(len(salary2[:5])):
+    legend_data = salary2.index.to_list()[indx]
+    ax1.plot(years, salary2.iloc[indx].to_list(), label=legend_data, linestyle='--')
+  ax1.set_xlabel('years', color=color)
+  ax1.tick_params(axis='y', labelcolor=color)
+  ax1.tick_params(axis='x', labelcolor=color)
+  plt.xticks(rotation='vertical')
+  ax1.set_ylabel('Средняя зарплата, в руб.', color=color)
+  ax1.set_title("Изменение зарплаты по годам")
+
+  ax2 = ax1.twinx()
+  color = 'tab:red'
+  ax2.set_ylabel('Прирост к рошлому году, в %', color=color)
+  ax2.tick_params(axis='y', labelcolor=color)
+  for indx in range(5, len(salary2)):
+    legend_data = salary2.index.to_list()[indx]
+    ax2.plot(years, salary2.iloc[indx].to_list(), label=legend_data)
+  ax2.legend()
+
+  return fig
