@@ -67,6 +67,7 @@ def salary_dinamic_graph (df, df2=False):
   # добавим график среднего уровня зарплат по 4-ем отраслям
   ax1.plot(years, avarage_salary, label='avarage_salary', linestyle='--')
   ax1.set_xlabel('years')
+  plt.xticks(rotation='vertical')
   ax1.set_ylabel('salary')
   ax1.set_title("Изменение зарплаты по годам")
   ax1.legend()
