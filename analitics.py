@@ -63,7 +63,7 @@ ax1.tick_params(axis='x', labelcolor=color)
 plt.xticks(rotation='vertical')
 ax1.set_ylabel('Средняя зарплата, в руб.', color=color)
 ax1.set_title("Изменение зарплаты по годам")
-ax1.legend()
+
 
 ax2 = ax1.twinx()
 color = 'tab:red'
@@ -72,7 +72,7 @@ ax2.tick_params(axis='y', labelcolor=color)
 for indx in range(5, len(salary2)):
   legend_data = salary2.index.to_list()[indx]
   ax2.plot(years, salary2.iloc[indx].to_list(), label=legend_data)
-
+ax2.legend()
 plt.show()
 
 """Номинальная зарплата растут, в то время как прирост по отношению к прошлому году имеет тенденцию к снижению"""
