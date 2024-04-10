@@ -87,6 +87,9 @@ def salary_dinamic_graph (df, df2=False):
 
 
 def real_salary_graph(year, inflation, salary):
+    
+    ''' Функция для добавления сравнения с прошлым годом номинальной и реальной зп'''
+    
   year = int(year)
   infl = inflation['Всего'] [inflation['Год'] == year].item()
   correct_on_infl = salary[str(year)] * ((100 - infl) / 100)
@@ -117,6 +120,9 @@ def real_salary_graph(year, inflation, salary):
 
 
 def add_prirost(salary):
+    
+''' Функция для добавления графика прироста'''
+    
   salary2 = salary.T
   salary2.columns = salary2.iloc[0]
   salary2 = salary2[1:]
@@ -154,3 +160,43 @@ def add_prirost(salary):
   ax2.legend()
 
   return fig
+
+
+def add_real(salary):
+
+    ''' Функция для добавления скорректированной на инфляцию зп'''
+    
+salary3 = salary.T
+salary3.columns = salary3.iloc[0]
+salary3 = salary3[1:]
+
+for col in salary3.columns.to_list():
+  salary3[f'Реальная ЗП '+ col] = 0
+  for indx in range(len(salary3)):
+    salary3[f'Реальная ЗП '+ col][indx] = float('%.2f' %float(salary3[col][indx]*((100 - inflation_data[indx])/100)))
+salary3 = salary3.T
+years = salary3.columns.to_list()
+fig, ax1 = plt.subplots()
+color = 'tab:blue'
+for indx in range(4):
+  legend_data = salary3.index.to_list()[indx]
+  ax1.plot(years, salary3.iloc[indx].to_list(), label=legend_data)
+    
+ax1.set_xlabel('years', color=color)
+ax1.tick_params(axis='y', labelcolor=color)
+ax1.tick_params(axis='x', labelcolor=color)
+plt.xticks(rotation='vertical')
+ax1.set_ylabel('Средняя зарплата, в руб.', color=color)
+ax1.set_title("Изменение зарплаты по годам")
+ax1.legend()
+
+ax2 = ax1.twinx()
+color = 'tab:red'
+ax2.set_ylabel('Реальная зп, в тыс руб', color=color)
+ax2.tick_params(axis='y', labelcolor=color)
+for indx in range(4, len(salary3)):
+  ax2.plot(years, salary3.iloc[indx].to_list(), linestyle='--')
+ax2.set_yscale('linear')
+ax2.legend('Реал', loc = 'upper right')
+
+return fig
