@@ -109,6 +109,7 @@ if case == 'Динамику номинальной зарплаты по отр
                 with st.spinner('Рисуем, рисуем, рисуем...'):
                     time.sleep(2)
                 st.write(add_prirost(salary))
+                st.text('Номинальная зарплата растет, в то время как прирост по отношению к прошлому году имеет тенденцию к снижению')
 
 else:
     year = st.sidebar.selectbox('Реальная зарплата за', salary.columns.to_list()[2:])
