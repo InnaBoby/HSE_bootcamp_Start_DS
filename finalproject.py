@@ -83,39 +83,35 @@ def salary_dinamic_graph (df, df2=False):
   return fig
 
 
-
-
-
 def real_salary_graph(year, inflation, salary):
     
-    ''' Функция для добавления сравнения с прошлым годом номинальной и реальной зп'''
+''' Функция для добавления сравнения с прошлым годом номинальной и реальной зп'''
+    year = int(year)
+    infl = inflation['Всего'] [inflation['Год'] == year].item()
+    correct_on_infl = salary[str(year)] * ((100 - infl) / 100)
+    data = salary[['Sphere', str(year-1), str(year)]]
+    data['correct_on_inflation'] = correct_on_infl
     
-  year = int(year)
-  infl = inflation['Всего'] [inflation['Год'] == year].item()
-  correct_on_infl = salary[str(year)] * ((100 - infl) / 100)
-  data = salary[['Sphere', str(year-1), str(year)]]
-  data['correct_on_inflation'] = correct_on_infl
-
-  x = np.arange(len(data))
-
-  fig, ax = plt.subplots(figsize=(10, 5))
-  # столбец для предыдущего года
-  v_1 = ax.bar(x - 0.3, data[str(year-1)], color='green', width=0.3, label=str(year-1))
-  ax.bar_label(v_1, padding=3)
-  # столбцы для выбранного года
-  v_2 = ax.bar(x, data[str(year)], color='blue', width=0.3, label=str(year))
-  ax.bar_label(v_2, padding=3)
-  # столбцы для скорректированной на инфляцию зарплаты выбранного года
-  v_3 = ax.bar(x + 0.3, data['correct_on_inflation'], color='red', width=0.3, label='corrected on inflation')
-  ax.bar_label(v_3, padding=3)
-  # подпись меток оси х
-  ax.set_xticks(x, data['Sphere'].to_list())
-  ax.set_xlabel('Отрасли')
-  ax.set_ylabel('Средняя зарплата в отрасли, в рублях')
-  ax.set_title("Динамика изменения реальных зарплат с учетом инфляции")
-  ax.legend()
-
-  return fig
+    x = np.arange(len(data))
+    
+    fig, ax = plt.subplots(figsize=(10, 5))
+    # столбец для предыдущего года
+    v_1 = ax.bar(x - 0.3, data[str(year-1)], color='green', width=0.3, label=str(year-1))
+    ax.bar_label(v_1, padding=3)
+    # столбцы для выбранного года
+    v_2 = ax.bar(x, data[str(year)], color='blue', width=0.3, label=str(year))
+    ax.bar_label(v_2, padding=3)
+    # столбцы для скорректированной на инфляцию зарплаты выбранного года
+    v_3 = ax.bar(x + 0.3, data['correct_on_inflation'], color='red', width=0.3, label='corrected on inflation')
+    ax.bar_label(v_3, padding=3)
+    # подпись меток оси х
+    ax.set_xticks(x, data['Sphere'].to_list())
+    ax.set_xlabel('Отрасли')
+    ax.set_ylabel('Средняя зарплата в отрасли, в рублях')
+    ax.set_title("Динамика изменения реальных зарплат с учетом инфляции")
+    ax.legend()
+    
+    return fig
 
 
 
