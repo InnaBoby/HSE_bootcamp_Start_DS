@@ -15,8 +15,8 @@ st.image(img)
 
 
 #подгружаем данные по средним номинальным зарплатам
-salary_1 = pd.read_excel('tab3-zpl_2000-2016.xlsx')
-salary_2 = pd.read_excel('tab3-zpl_2023.xlsx')
+salary_1 = pd.read_excel('data/tab3-zpl_2000-2016.xlsx')
+salary_2 = pd.read_excel('data/tab3-zpl_2023.xlsx')
 salary = prepare_salary_data(salary_1, salary_2)
 
 st.text('Среднемесячная номинальная начисленная заработная плата работников организаций \nпо видам экономической деятельности в Российской Федерации за 2000-2023 гг., в рублях')
@@ -104,20 +104,21 @@ if case == 'Динамику номинальной зарплаты по отр
                 st.write(salary_dinamic_graph(salary, vvp_data))
 
     elif add == 'Прирост к прошлому году':
-            
-            if (st.button('Показать график')):
-                with st.spinner('Рисуем, рисуем, рисуем...'):
-                    time.sleep(2)
-                st.write(add_prirost(salary))
-                st.text('Номинальная зарплата растет, в то время как прирост по отношению к прошлому году имеет тенденцию к снижению')
+
+        if (st.button('Показать график')):
+            with st.spinner('Рисуем, рисуем, рисуем...'):
+                time.sleep(2)
+            st.write(add_prirost(salary))
+
 
     elif add == 'Реальная зп с учетом инфляции':
-                
-            if (st.button('Показать график')):
-                with st.spinner('Рисуем, рисуем, рисуем...'):
-                    time.sleep(2)
-                st.write(add_real(salary))
-                st.text('Реальная зарплата растет, но чем больше инфляция, тем больше разница между номинальной и реальной зарплатой')
+
+        if (st.button('Показать график')):
+            with st.spinner('Рисуем, рисуем, рисуем...'):
+                time.sleep(2)
+            st.write(add_real(salary))
+            st.text(
+                'Реальная зарплата растет, но чем больше инфляция, тем больше разница между номинальной и реальной зарплатой')
 
 
 else:
