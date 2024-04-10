@@ -15,8 +15,8 @@ st.image(img)
 
 
 #подгружаем данные по средним номинальным зарплатам
-salary_1 = pd.read_excel('data/tab3-zpl_2000-2016.xlsx')
-salary_2 = pd.read_excel('data/tab3-zpl_2023.xlsx')
+salary_1 = pd.read_excel('tab3-zpl_2000-2016.xlsx')
+salary_2 = pd.read_excel('tab3-zpl_2023.xlsx')
 salary = prepare_salary_data(salary_1, salary_2)
 
 st.text('Среднемесячная номинальная начисленная заработная плата работников организаций \nпо видам экономической деятельности в Российской Федерации за 2000-2023 гг., в рублях')
