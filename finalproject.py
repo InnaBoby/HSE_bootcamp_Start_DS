@@ -155,7 +155,11 @@ def add_prirost(salary):
 
   return fig
 
-  def add_real(salary):
+
+
+
+
+def add_real(salary):
 
     ''' Функция для добавления скорректированной на инфляцию зп'''
 
