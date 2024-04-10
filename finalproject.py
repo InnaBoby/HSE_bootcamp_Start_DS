@@ -174,8 +174,11 @@ def add_real(salary):
       salary3[f'Реальная ЗП '+ col] = 0
       for indx in range(len(salary3)):
         salary3[f'Реальная ЗП '+ col][indx] = float('%.2f' %float(salary3[col][indx]*((100 - inflation_data[indx])/100)))
+    
     salary3 = salary3.T
+    
     years = salary3.columns.to_list()
+    
     fig, ax1 = plt.subplots()
     color = 'tab:blue'
     for indx in range(4):
